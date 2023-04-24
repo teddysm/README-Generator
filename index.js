@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const fs = require('fs');
 let badge = "";
 let badgeDesc = "";
+let licenseSection = 'Click here to read more on the license: ';
 
 // TODO: Create an array of questions for user input
 const questions = ['projectTitle','description', 'installationInstructions', 
@@ -16,8 +17,8 @@ function writeToFile(fileName, data) {
 }
 
 // TODO: Create a function to initialize app
-function init() {
-  const response = inquirer.prompt([
+async function init() {
+  const response = await inquirer.prompt([
     {
       type: 'input',
       message: 'What is your project title?',
@@ -49,7 +50,7 @@ function init() {
       name: 'testInstructions',
     },
     {
-      type: 'checkbox',
+      type: 'list',
       message: 'Which license do you want for your application?',
       choices: ['MIT', 'GPLv2', 'GPLv3', 'Apache', 'BSD 3-clause'],
       name: 'license',
@@ -64,36 +65,36 @@ function init() {
       message: 'What is your email?',
       name: 'email',
     },
-    // {
-    //   type: 'list',
-    //   message: 'What is your preferred method of communication?',
-    //   choices: ['Text', 'Call', 'F2F'],
-    //   name: 'comms',
-    // },
   ])
 
   console.log(response);
-  
+  console.log(response.license);
+
   switch(response.license){
     case 'MIT':
       badge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
       badgeDesc = 'A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.';
+      licenseSection += '[MIT License](https://opensource.org/licenses/MIT)';
       break;
     case 'GPLv2':
       badge = '[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)';
       badgeDesc = 'Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.';
+      licenseSection += '[GPL v3 License](https://www.gnu.org/licenses/gpl-3.0)';
       break;
     case 'GPLv3':
       badge = '[![License: GPL v2](https://img.shields.io/badge/License-GPL_v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)';
       badgeDesc = 'Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.';
+      licenseSection += '[GPL v2 License](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)';
       break;
     case 'Apache':
       badge = '[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)';
       badgeDesc = 'A permissive license whose main conditions require preservation of copyright and license notices. Contributors provide an express grant of patent rights. Licensed works, modifications, and larger works may be distributed under different terms and without source code.';
+      licenseSection += '[Apache License](https://opensource.org/licenses/Apache-2.0)';
       break;
     case 'BSD 3-clause':
       badge = '[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)';
       badgeDesc = 'The BSD 3-Clause License The following is a BSD 3-Clause ("BSD New" or "BSD Simplified") license template. To generate your own license, change the values of OWNER, ORGANIZATION and YEAR from their original values as given here, and substitute your own.';
+      licenseSection += '[BSD 3-clause License](https://opensource.org/licenses/BSD-3-Clause)';
       break;
     default:
       console.log('Wrong option');
@@ -103,55 +104,61 @@ function init() {
   // Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
 
   const README = `
-    # ${response.projectTitle}
+# ${response.projectTitle}
 
-    <br>
-    
-    ${badge}
+<br>
 
-    <br>
+${badge}
 
-    ## Table of Contents 
-    - [Table of Contents](#table-of-contents)
-    - [Description](#description)
-    - [Installation Instructions](#installation-instructions)
-    - [Usage Information](#usage-information)
-    - [Contribution Guidelines](#contribution-guidelines)
-    - [Test Instructions](#test-instructions)
-    - [Questions](#questions)
-    - [License](#license)
+<br>
 
-    <br>
+## Table of Contents 
+- [Table of Contents](#table-of-contents)
+- [Description](#description)
+- [Installation Instructions](#installation-instructions)
+- [Usage Information](#usage-information)
+- [Contribution Guidelines](#contribution-guidelines)
+- [Test Instructions](#test-instructions)
+- [Questions](#questions)
+- [License](#license)
 
-    ## Description
-    - ${response.description}
-    
-    <br>
+<br>
 
-    ## Installation Instructions
-    - ${response.installationInstructions}
+## Description
+- ${response.description}
 
-    <br>
+<br>
 
-    ## Usage Information
-    - ${response.usageInformation}
+## Installation Instructions
+- ${response.installationInstructions}
 
-    <br>
+<br>
 
-    ## Contribution Guidelines
-    - ${response.contributionGuidelines}
+## Usage Information
+- ${response.usageInformation}
 
-    <br>
+<br>
 
-    ## Test Instructions 
-    - ${response.testInstructions}
+## Contribution Guidelines
+- ${response.contributionGuidelines}
 
-    ## Questions
-    - Github: www.github.com/${response.github}
-    - Email: ${response.email}
+<br>
 
-    ## License: 
-    - ${badgeDesc}
+## Test Instructions 
+- ${response.testInstructions}
+
+<br>
+
+## Questions
+- Github: www.github.com/${response.github}
+- Email: ${response.email}
+
+<br>
+
+## License: 
+${badgeDesc}
+
+${licenseSection}
 
   `
 
