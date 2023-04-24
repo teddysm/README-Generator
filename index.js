@@ -8,6 +8,7 @@ let licenseSection = 'Click here to read more on the license: ';
 // TODO: Create an array of questions for user input
 const questions = ['projectTitle','description', 'installationInstructions', 
                   'usageInformation', 'contributionGuidelines', 'testInstructions'];
+// This variable holds the actual license chosen by the user
 const license = '';
 
 // TODO: Create a function to write README file
@@ -18,6 +19,7 @@ function writeToFile(fileName, data) {
 
 // TODO: Create a function to initialize app
 async function init() {
+  // this prompt ask user questions about the content of the README
   const response = await inquirer.prompt([
     {
       type: 'input',
@@ -67,9 +69,8 @@ async function init() {
     },
   ])
 
-  console.log(response);
-  console.log(response.license);
-
+  // switch statement will store the correct badge description and license link according to the license chosen by user
+  // each case will cater to a different license
   switch(response.license){
     case 'MIT':
       badge = '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
@@ -101,8 +102,8 @@ async function init() {
       break;
   }
 
-  // Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
-
+  // this is the boilerplate content of the README
+  // user input will be inserted via template literals
   const README = `
 # ${response.projectTitle}
 
@@ -162,7 +163,8 @@ ${badgeDesc}
 ${licenseSection}
 
   `
-
+  //call the function to write this README file
   writeToFile('README-Generator.md', README);
 }
+
 init();
