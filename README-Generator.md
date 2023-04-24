@@ -1,5 +1,5 @@
 
-# README-Gener8
+# README-Generator
 
 <br>
 
@@ -20,33 +20,34 @@
 <br>
 
 ## Description
-- djhasjkda
+- This project generates a professional looking README
 
 <br>
 
 ## Installation Instructions
-- hdsakjhdjksa
+- Not required
 
 <br>
 
 ## Usage Information
-- dhaskjdhajskd
+- Feed the prompts with information you want for your README
 
 <br>
 
 ## Contribution Guidelines
-- weuqyiqwyeuiwq
+- N/A
 
 <br>
 
 ## Test Instructions 
-- shdjsahdjkas
+- N/A
 
 <br>
 
 ## Questions
-- Github: www.github.com/teddy
-- Email: ted@ted
+Please contact me for further questions:
+- Github: www.github.com/teddysm
+- Email: doan.teddy@gmail.com
 
 <br>
 

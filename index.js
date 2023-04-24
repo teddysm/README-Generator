@@ -159,10 +159,10 @@ Please contact me for further questions:
 
 ## License: 
 ${badgeDesc}
-
 ${licenseSection}
+`
 
-  `
+  console.log('Your README has been successfully generated!')
   //call the function to write this README file
   writeToFile('README-Generator.md', README);
 }
