@@ -150,6 +150,7 @@ ${badge}
 <br>
 
 ## Questions
+Please contact me for further questions:
 - Github: www.github.com/${response.github}
 - Email: ${response.email}
 

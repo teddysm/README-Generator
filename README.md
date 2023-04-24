@@ -1,7 +1,6 @@
 # README-Generator
 
-# Weather Dashboard
-This is a Weather Dashboard with a 5-day weather forecast
+This is a README-Generator. Feed it information and it will generate a professional-looking README
 
 <br>
 
